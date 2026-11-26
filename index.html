@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Video Tool — Free Video Trimmer</title>
+<meta name="description" content="Free video trimmer. Trim, mute, speed, thumbnail — client-side only, no server, no login, no payment.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+  <header class="hero">
+    <div class="hero-row">
+      <div>
+        <h1>🎬 Video Tool<br>Free Video Trimmer</h1>
+        <p>Trim videos, mute audio, change speed, and extract thumbnails.</p>
+        <div>
+          <span class="badge">✓ Free</span>
+          <span class="badge">✓ No login</span>
+          <span class="badge">✓ No payment</span>
+          <span class="badge">✓ Files stay on your device</span>
+        </div>
+      </div>
+      <button class="btn btn-light" id="shareBtn" type="button">🔗 Share</button>
+    </div>
+  </header>
+
+  <main class="card">
+    <h2>🎬 Video Tool <small>Video Trimmer</small></h2>
+    <p>Upload a video, trim the start and end, then download the result.</p>
+
+    <div class="drop" id="dropZone" tabindex="0">
+      <p class="drop-big">📁 Choose a video file / drag &amp; drop it here</p>
+      <p class="status">MP4, WebM, MOV and other browser-supported formats work.</p>
+      <input type="file" id="fileInput" accept="video/*" hidden>
+      <button class="btn btn-primary" id="pickBtn" type="button">📁 Choose file</button>
+    </div>
+
+    <div id="editor" hidden>
+      <video id="video" controls playsinline preload="metadata"></video>
+
+      <div class="info" id="videoInfo">—</div>
+
+      <div class="controls">
+        <button class="btn btn-ghost" id="playBtn" type="button">▶️ Play / Pause</button>
+        <button class="btn btn-ghost" id="muteBtn" type="button">🔊 Sound on</button>
+        <label for="speedSel">Speed
+          <select id="speedSel">
+            <option value="0.5">0.5x</option>
+            <option value="1" selected>1x</option>
+            <option value="1.5">1.5x</option>
+            <option value="2">2x</option>
+          </select>
+        </label>
+        <label class="check"><input type="checkbox" id="loopTrim" checked> Loop trimmed range only</label>
+      </div>
+
+      <fieldset>
+        <legend>✂️ Trim</legend>
+        <label for="startRange">Start: <b id="startLabel">0:00</b></label>
+        <input type="range" id="startRange" min="0" max="100" step="0.1" value="0">
+        <label for="endRange">End: <b id="endLabel">0:00</b></label>
+        <input type="range" id="endRange" min="0" max="100" step="0.1" value="100">
+        <p class="status">Trimmed length: <b id="trimLength">0:00</b> • <button class="btn btn-ghost" id="previewTrimBtn" type="button">▶️ Preview trimmed clip</button></p>
+      </fieldset>
+
+      <div class="row">
+        <button class="btn btn-primary" id="exportBtn" type="button">⬇️ Export trimmed clip</button>
+        <button class="btn btn-ghost" id="thumbBtn" type="button">🖼️ Save thumbnail (PNG)</button>
+      </div>
+      <p class="status" id="exportStatus">Export status: upload a video, trim it, then download the clip.</p>
+      <progress id="exportProgress" max="100" value="0" hidden></progress>
+    </div>
+  </main>
+
+  <footer>
+    <p>🔒 Privacy: your videos never leave this device — there is no server. Export uses the ffmpeg.wasm converter loaded from the internet, but your file is not uploaded to any server.<br>
+    Free forever — deploy it free on GitHub Pages. See README.md.</p>
+  </footer>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
